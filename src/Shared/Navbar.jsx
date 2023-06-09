@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-
+import { AuthContext } from '../provider/AuthProvider';
+import {RxAvatar} from 'react-icons/rx'
+import {FiLogOut} from 'react-icons/fi'
 const Navbar = () => {
+    const {user} = useContext(AuthContext)
     const navItem = <div className='md:space-x-8 space-y-3 md:space-y-0 pb-2 mb:pb-0 md:flex'>
-        <p className='text-lg'><NavLink className={({isActive}) => isActive ? 'border-b-2 pb-2 text-rose-500 border-rose-500':''} to='/'>Home</NavLink></p>
-        <p className='text-lg'><NavLink className={({isActive}) => isActive ? 'border-b-2 pb-2 text-rose-500 border-rose-500':''} to='/instructor'>Instructors</NavLink></p>
-        <p className='text-lg'><NavLink className={({isActive}) => isActive ? 'border-b-2 pb-2 text-rose-500 border-rose-500':''} to='/classes'>Classes</NavLink></p>
-        <p className='text-lg'><NavLink className={({isActive}) => isActive ? 'border-b-2 pb-2 text-rose-500 border-rose-500':''} to='/dashboard'>Dashboard</NavLink></p>
-        <p className='text-lg'><NavLink className={({isActive}) => isActive ? 'border-b-2 pb-2 text-rose-500 border-rose-500':''} to='/login'>Login</NavLink></p>
-        
+        <p className='text-lg hover:text-rose-500 transition-all'><NavLink className={({ isActive }) => isActive ? 'border-b-2 pb-2 text-rose-500 border-rose-500' : ''} to='/'>Home</NavLink></p>
+        <p className='text-lg hover:text-rose-500 transition-all'><NavLink className={({ isActive }) => isActive ? 'border-b-2 pb-2 text-rose-500 border-rose-500' : ''} to='/instructor'>Instructors</NavLink></p>
+        <p className='text-lg hover:text-rose-500 transition-all'><NavLink className={({ isActive }) => isActive ? 'border-b-2 pb-2 text-rose-500 border-rose-500' : ''} to='/classes'>Classes</NavLink></p>
        
-        
+        <p className='text-lg hover:text-rose-500 transition-all '> {
+            user ? 
+            <NavLink to={'/'}><span className='flex items-center gap-1'>
+                <FiLogOut/> <span>LogOut</span></span></NavLink>
+            :<NavLink className={({ isActive }) => isActive ? 'border-b-2 pb-2 text-rose-500 border-rose-500' : ''} to='/login'>Login</NavLink>
+        }</p>
+
+
+
     </div>
     return (
         <div className='fixed font-semibold pt-4 w-full z-10 bg-transparent'>
@@ -32,7 +40,11 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Button</a>
+                    <div className="avatar">
+                        <div className=" w-[40px] rounded-full">
+                            {user ? <img src={ user?.photoURL} /> : <RxAvatar size={40}/>}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
