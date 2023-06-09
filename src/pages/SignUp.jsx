@@ -6,7 +6,7 @@ import { AuthContext } from '../provider/AuthProvider';
 import { ToastContainer, toast } from 'react-toastify';
 
 const SignUp = () => {
-    const {createUser,signInWithGoogle,updateUserProfile} = useContext(AuthContext)
+    const {createUser,signInWithGoogle,updateUserProfile,loading} = useContext(AuthContext)
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
         if(data.password !== data.confirmPassword){
@@ -25,8 +25,17 @@ const SignUp = () => {
         }
 
     };
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+        .then(result => {
+            console.log(result.user);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
     return (
-        <div className='flex justify-center pt-24 items-center min-h-screen'>
+        <div className='flex justify-center pt-28 items-center min-h-screen'>
             <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900'>
                 <div className='mb-8 text-center'>
                     <h1 className='my-3 text-4xl font-bold'>Sign Up</h1>
@@ -114,7 +123,7 @@ const SignUp = () => {
                     </div>
 
                     <div>
-                        <button
+                        <button disabled={loading ? true : false}
                             type='submit'
                             className='bg-rose-500 w-full rounded-md py-3 text-white'
                         >
@@ -129,7 +138,7 @@ const SignUp = () => {
                     </p>
                     <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
                 </div>
-                <div className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
+                <div onClick={handleGoogleSignIn} className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
                     <FcGoogle size={32} />
 
                     <p>Continue with Google</p>

@@ -1,8 +1,31 @@
 import { Link } from 'react-router-dom'
-
+import { useForm } from "react-hook-form";
 import { FcGoogle } from 'react-icons/fc'
+import { useContext } from 'react'
+import { AuthContext } from '../provider/AuthProvider'
 
 const Login = () => {
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const {signIn,signInWithGoogle} = useContext(AuthContext)
+    const onSubmit = (data) => {
+        signIn(data.email,data.password)
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+            })
+            .catch(err => {
+                toast(err)
+            })
+    }
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+        .then(result => {
+            console.log(result.user);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
   return (
     <div className='flex justify-center items-center pt-28'>
       <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900'>
@@ -12,7 +35,7 @@ const Login = () => {
             Sign in to access your account
           </p>
         </div>
-        <form
+        <form  onSubmit={handleSubmit(onSubmit)}
           noValidate=''
           action=''
           className='space-y-6 ng-untouched ng-pristine ng-valid'
@@ -22,7 +45,7 @@ const Login = () => {
               <label htmlFor='email' className='block mb-2 text-sm'>
                 Email address
               </label>
-              <input
+              <input  {...register("email", { required: true })}
                 type='email'
                 name='email'
                 id='email'
@@ -38,7 +61,7 @@ const Login = () => {
                   Password
                 </label>
               </div>
-              <input
+              <input  {...register("password", { required: true })}
                 type='password'
                 name='password'
                 id='password'
@@ -47,6 +70,7 @@ const Login = () => {
                 className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900'
               />
             </div>
+            <div className='text-red-400 text-center'>{errors.password && <span>Password not matched</span>}</div>
           </div>
 
           <div>
@@ -70,7 +94,7 @@ const Login = () => {
           </p>
           <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
         </div>
-        <div className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
+        <div onClick={handleGoogleSignIn} className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
           <FcGoogle size={32} />
 
           <p>Continue with Google</p>
