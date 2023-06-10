@@ -1,31 +1,38 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import { FcGoogle } from 'react-icons/fc'
 import { useContext } from 'react'
 import { AuthContext } from '../provider/AuthProvider'
+import { saveUser } from '../api/auth';
 
 const Login = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const {signIn,signInWithGoogle} = useContext(AuthContext)
-    const onSubmit = (data) => {
-        signIn(data.email,data.password)
-            .then(result => {
-                const loggedUser = result.user;
-                console.log(loggedUser);
-            })
-            .catch(err => {
-                toast(err)
-            })
-    }
-    const handleGoogleSignIn = () => {
-        signInWithGoogle()
-        .then(result => {
-            console.log(result.user);
-        })
-        .catch(err => {
-            console.log(err);
-        })
-    }
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { signIn, signInWithGoogle } = useContext(AuthContext)
+  const navigate = useNavigate()
+  const location = useLocation()
+  const from = location.state?.from?.pathname || '/'
+  const onSubmit = (data) => {
+    signIn(data.email, data.password)
+      .then(result => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        navigate(from)
+      })
+      .catch(err => {
+        toast(err)
+      })
+  }
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+      .then(result => {
+        saveUser(result.user)
+        console.log(result.user);
+        navigate(from)
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
   return (
     <div className='flex justify-center items-center pt-28'>
       <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900'>
@@ -35,7 +42,7 @@ const Login = () => {
             Sign in to access your account
           </p>
         </div>
-        <form  onSubmit={handleSubmit(onSubmit)}
+        <form onSubmit={handleSubmit(onSubmit)}
           noValidate=''
           action=''
           className='space-y-6 ng-untouched ng-pristine ng-valid'

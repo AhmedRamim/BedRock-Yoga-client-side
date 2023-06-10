@@ -19,7 +19,7 @@ const Banner = () => {
             <Swiper navigation={true} autoplay modules={[Navigation,Autoplay]} className="mySwiper h-full ">
                 <div className="">
                     <SwiperSlide className=" bg-rose-100">
-                        <div className="md:flex container px-6 md:px-0   md:pt-20 h-full items-center justify-center">
+                        <div className="md:flex container px-6 md:px-0   pt-20 h-full items-center justify-center">
                             <div className="md:w-1/2">
                                 <img className="w-[560px]" src={slider2} alt="" />
                             </div>
@@ -32,7 +32,7 @@ const Banner = () => {
                             </div>
                         </div>
                     </SwiperSlide>
-                    <SwiperSlide className="bg-amber-100"> <div className="md:flex container px-6 md:px-0   md:pt-20 h-full items-center justify-center">
+                    <SwiperSlide className="bg-amber-100"> <div className="md:flex container px-6 md:px-0 pt-28  md:pt-20 h-full items-center justify-center">
                         <div className="md:w-1/2 space-y-6">
                             <h1 className="text-[78px] text-gray-700 leading-[5rem] font-bold">
                             Find lifestyle to the yoga</h1>
@@ -44,7 +44,7 @@ const Banner = () => {
                             <img className="w-[460px]" src={slider1} alt="" />
                         </div>
                     </div></SwiperSlide>
-                    <SwiperSlide className="bg-blue-100"> <div className="md:flex container px-6 md:px-0   md:pt-20 h-full items-center justify-center">
+                    <SwiperSlide className="bg-blue-100"> <div className="md:flex container px-6 md:px-0 pt-32  md:pt-20 h-full items-center justify-center">
                         <div className="md:w-1/2">
                             <img className="w-[560px]" src={slider3} alt="" />
                         </div>

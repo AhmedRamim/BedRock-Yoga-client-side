@@ -8,9 +8,9 @@ const Navbar = () => {
     const { user,logOut } = useContext(AuthContext)
     const navItem = <div className='md:space-x-8 space-y-3 md:space-y-0 pb-2 mb:pb-0 md:flex'>
         <p className='text-lg hover:text-rose-500 transition-all'><NavLink className={({ isActive }) => isActive ? 'border-b-2 pb-2 text-rose-500 border-rose-500' : ''} to='/'>Home</NavLink></p>
-        <p className='text-lg hover:text-rose-500 transition-all'><NavLink className={({ isActive }) => isActive ? 'border-b-2 pb-2 text-rose-500 border-rose-500' : ''} to='/instructor'>Instructors</NavLink></p>
+        <p className='text-lg hover:text-rose-500 transition-all'><NavLink className={({ isActive }) => isActive ? 'border-b-2 pb-2 text-rose-500 border-rose-500' : ''} to='/instructors'>Instructors</NavLink></p>
         <p className='text-lg hover:text-rose-500 transition-all'><NavLink className={({ isActive }) => isActive ? 'border-b-2 pb-2 text-rose-500 border-rose-500' : ''} to='/classes'>Classes</NavLink></p>
-        <p className='text-lg hover:text-rose-500 transition-all'>{user && <NavLink className={({ isActive }) => isActive ? 'border-b-2 pb-2 text-rose-500 border-rose-500' : ''} to='/classes'>Dashboard</NavLink>}</p>
+        <p className='text-lg hover:text-rose-500 transition-all'>{user && <NavLink className={({ isActive }) => isActive ? 'border-b-2 pb-2 text-rose-500 border-rose-500' : ''} to='/dashboard'>Dashboard</NavLink>}</p>
         <p className='text-lg hover:text-rose-500 transition-all '> {
             user ?
                 <NavLink onClick={() => logOut()}><span className='flex items-center gap-1'>

@@ -1,38 +1,64 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import { FcGoogle } from 'react-icons/fc'
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../provider/AuthProvider';
 import { ToastContainer, toast } from 'react-toastify';
+import { saveUser } from '../api/auth';
+
+const image_hosting_token = import.meta.env.VITE_image_upload_token;
 
 const SignUp = () => {
-    const {createUser,signInWithGoogle,updateUserProfile,loading} = useContext(AuthContext)
+    const navigate = useNavigate()
+    const [url, setUrl] = useState('')
+    const { createUser, signInWithGoogle, updateUserProfile, loading } = useContext(AuthContext)
+    const imgUrl = `https://api.imgbb.com/1/upload?key=${image_hosting_token}`
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
-        if(data.password !== data.confirmPassword){
+        if (data.password !== data.confirmPassword) {
             toast('Password not matched')
-            
+
         }
-        else{
-            createUser(data.email,data.password)
-            .then(result => {
-                const loggedUser = result.user;
-                console.log(loggedUser);
-            })
-            .catch(err => {
-                toast(err)
-            })
+        else {
+            createUser(data.email, data.password)
+                .then(result => {
+                    const formData = new FormData()
+                    formData.append('image', data.image[0])
+                    fetch(imgUrl, {
+                        method: "POST",
+                        body: formData
+                    })
+                        .then(res => res.json())
+                        .then(imgResponse => {
+
+                            const imgURL = imgResponse.data.display_url;
+                            updateUserProfile(data.name, imgURL)
+                                .then(() => { })
+                                .catch(err => console.log(err))
+
+                        })
+                    toast('SignUp Successful')
+                    saveUser(result.user)
+
+                    const loggedUser = result.user;
+                    navigate('/')
+                    console.log(loggedUser);
+                })
+                .catch(err => {
+                    toast(err)
+                })
         }
 
     };
     const handleGoogleSignIn = () => {
         signInWithGoogle()
-        .then(result => {
-            console.log(result.user);
-        })
-        .catch(err => {
-            console.log(err);
-        })
+            .then(result => {
+                saveUser(result.user)
+                console.log(result.user);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
     return (
         <div className='flex justify-center pt-28 items-center min-h-screen'>
@@ -40,7 +66,7 @@ const SignUp = () => {
                 <div className='mb-8 text-center'>
                     <h1 className='my-3 text-4xl font-bold'>Sign Up</h1>
                     <p className='text-sm text-gray-400'>Welcome to Yoga Master</p>
-                    <ToastContainer/>
+                    <ToastContainer />
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}
                     noValidate=''
