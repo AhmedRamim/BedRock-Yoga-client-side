@@ -7,10 +7,6 @@ import Swal from 'sweetalert2';
 const UpdateClass = () => {
     const [data, , isLoading] = useAllData()
     const { user } = useContext(AuthContext)
-    // const [className, setClassName] = useState('');
-    // const [classImage, setClassImage] = useState('');
-    // const [availableSeats, setAvailableSeats] = useState('');
-    // const [price, setPrice] = useState('');
     const { id } = useParams()
     const classData = data?.find(singleData => singleData._id === id)
     

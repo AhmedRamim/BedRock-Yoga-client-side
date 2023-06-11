@@ -2,7 +2,7 @@
 
 // save user in the database
 export const saveUser = (user) =>  {
-    console.log('this is saveUser',user);
+    // console.log('this is saveUser',user);
     const currentUser = {
         name:user?.displayName,
         email:user?.email,
@@ -16,7 +16,7 @@ export const saveUser = (user) =>  {
     })
     .then(res => res.json())
     .then(data => {
-        console.log(data);
+        // console.log(data);
     })
   
 }

@@ -7,14 +7,14 @@ import {SiGoogleclassroom} from 'react-icons/si'
 const Dashboard = () => {
 
   // TODO: isAdmin
-  const isAdmin = false;
-  const isInstructor = true;
+  const isAdmin = true;
+  const isInstructor = false;
   const isStudent = false
   return (
 
     <div className="drawer  lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content mx-auto md:w-[900px] ">
+      <div className="drawer-content mx-auto md:w-[1200px] ">
         
         {/* Page content here */}
         <div className='bg-slate-100 rounded-xl'><Outlet /></div>
@@ -23,7 +23,7 @@ const Dashboard = () => {
       </div>
       <div className="drawer-side ">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-        <ul className="menu p-4 w-80 h-full bg-rose-300">
+        <ul className="menu p-4 w-72 h-full bg-rose-300">
           {/* Sidebar content here */}
           {
             isAdmin && <><li><NavLink to={'/dashboard/home'}><FaAddressBook />Admin Home </NavLink></li>
