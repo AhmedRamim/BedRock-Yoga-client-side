@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const UpdateClass = () => {
-    const [data] = useAllData()
+    const [data, , isLoading] = useAllData()
     const { user } = useContext(AuthContext)
     // const [className, setClassName] = useState('');
     // const [classImage, setClassImage] = useState('');
@@ -13,7 +13,7 @@ const UpdateClass = () => {
     // const [price, setPrice] = useState('');
     const { id } = useParams()
     const classData = data?.find(singleData => singleData._id === id)
-
+    
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
