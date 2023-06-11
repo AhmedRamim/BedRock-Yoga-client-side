@@ -4,6 +4,7 @@ import { FcGoogle } from 'react-icons/fc'
 import { useContext } from 'react'
 import { AuthContext } from '../provider/AuthProvider'
 import { saveUser } from '../api/auth';
+import { toast,ToastContainer } from 'react-toastify';
 
 const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -15,21 +16,23 @@ const Login = () => {
     signIn(data.email, data.password)
       .then(result => {
         const loggedUser = result.user;
+        // saveUser(result.user)
         console.log(loggedUser);
         navigate(from)
       })
       .catch(err => {
-        toast(err)
+        toast.error(err.message)
       })
   }
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then(result => {
-        saveUser(result.user)
+        // saveUser(result.user)
         console.log(result.user);
         navigate(from)
       })
       .catch(err => {
+        toast.error(err.message)
         console.log(err);
       })
   }
@@ -41,6 +44,7 @@ const Login = () => {
           <p className='text-sm text-gray-400'>
             Sign in to access your account
           </p>
+          <ToastContainer/>
         </div>
         <form onSubmit={handleSubmit(onSubmit)}
           noValidate=''

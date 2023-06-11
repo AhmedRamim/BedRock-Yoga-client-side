@@ -1,10 +1,13 @@
+
+
 // save user in the database
 export const saveUser = (user) =>  {
+    console.log('this is saveUser',user);
     const currentUser = {
-        email:user.email,
-        role:'student'
+        name:user?.displayName,
+        email:user?.email,
     }
-    fetch(`http://localhost:5000/users/${user?.email}`,{
+        fetch(`${import.meta.env.VITE_url}/users/${user?.email}`,{
         method:'PUT',
         headers:{
             'content-type':'application/json'
@@ -15,4 +18,5 @@ export const saveUser = (user) =>  {
     .then(data => {
         console.log(data);
     })
+  
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 
 const ManageClasses = () => {
+    
     return (
         <div>
             Manage Classes

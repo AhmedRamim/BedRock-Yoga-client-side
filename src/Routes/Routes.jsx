@@ -11,6 +11,9 @@ import Classes from "../pages/Classes";
 import Dashboard from "../Layout/Dashboard";
 import ManageClasses from "../pages/Dashboard/AdminRoutes/ManageClasses";
 import ManageUsers from "../pages/Dashboard/AdminRoutes/ManageUsers";
+import AddClass from "../pages/Dashboard/Instructors/AddClass";
+import MyClass from "../pages/Dashboard/Instructors/MyClass";
+import UpdateClass from "../pages/Dashboard/Instructors/UpdateClass";
 
 
 export const Router = createBrowserRouter([
@@ -38,6 +41,7 @@ export const Router = createBrowserRouter([
         path:'classes',
         element:<Classes/>
       }
+    
 
     ]
   },
@@ -52,6 +56,18 @@ export const Router = createBrowserRouter([
       {
         path:'manageusers',
         element:<ManageUsers/>
+      },
+      {
+        path:'addclass',
+        element:<AddClass/>
+      },
+      {
+        path:'myclass',
+        element:<MyClass/>
+      },
+      {
+        path:'updateclass/:id',
+        element:<UpdateClass/>
       }
     ]
 

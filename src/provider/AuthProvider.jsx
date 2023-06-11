@@ -11,6 +11,7 @@ import {
   updateProfile,
 } from 'firebase/auth'
 import app from '../Firebase/firebase.config'
+import { saveUser } from '../api/auth'
 
 
 export const AuthContext = createContext(null)
@@ -57,13 +58,16 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
       setUser(currentUser)
+      if(currentUser?.displayName){
+        saveUser(currentUser)
+      }
       console.log('current user', currentUser)
       setLoading(false)
     })
     return () => {
       return unsubscribe()
     }
-  }, [])
+  }, [user])
 
   const authInfo = {
     user,

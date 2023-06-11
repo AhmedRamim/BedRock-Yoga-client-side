@@ -2,13 +2,13 @@ import React from 'react';
 import { FaCalendarAlt, FaHamburger, FaHome, FaPizzaSlice, FaSchool, FaShoppingCart, FaStreetView,FaAddressBook, FaUserAlt, FaWallet } from 'react-icons/fa';
 import { NavLink, Outlet } from 'react-router-dom';
 import {SiGoogleclassroom} from 'react-icons/si'
-import { Helmet } from 'react-helmet-async';
+
 
 const Dashboard = () => {
 
   // TODO: isAdmin
-  const isAdmin = true;
-  const isInstructor = false;
+  const isAdmin = false;
+  const isInstructor = true;
   const isStudent = false
   return (
 
@@ -17,7 +17,7 @@ const Dashboard = () => {
       <div className="drawer-content mx-auto md:w-[900px] ">
         
         {/* Page content here */}
-        <Outlet />
+        <div className='bg-slate-100 rounded-xl'><Outlet /></div>
         <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
 
       </div>
@@ -37,10 +37,11 @@ const Dashboard = () => {
               <li><NavLink to={'/dashboard/paymentHistory'}><FaWallet /> Payment </NavLink></li></>
           }
           {
-            isInstructor && <><li><NavLink to={'/dashboard/home'}><FaHome /> Home </NavLink></li>
-              <li><NavLink to={'/dashboard/reservation'}><FaSchool/> Add a Class </NavLink></li>
-              <li><NavLink to={'/dashboard/paymentHistory'}><FaSchool/> My Classed</NavLink></li>
-              <li><NavLink to={'/dashboard/paymentHistory'}><FaStreetView/> Feedback</NavLink></li></>
+            isInstructor && <>
+            <p className='text-4xl font-bold my-6 text-gray-600'>Instructor Home</p>
+              <li><NavLink to={'/dashboard/addclass'}><FaSchool/> Add a Class </NavLink></li>
+              <li><NavLink to={'/dashboard/myclass'}><FaSchool/> My Classed</NavLink></li>
+              <li><NavLink to={'/dashboard/feedback'}><FaStreetView/> Feedback</NavLink></li></>
           }
 
 
