@@ -68,7 +68,7 @@ const Classes = () => {
     }
 
     return (
-        <div className='pt-32 container'>
+        <div className='pt-32 mb-20 container'>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 '>
                 {
                     data?.map(singleClass => {
@@ -82,7 +82,7 @@ const Classes = () => {
                                 <p><span className='font-bold'>Available Seats: </span>{singleClass?.availableSeats}</p>
                                 <p><span className='font-bold'>Price: </span>${singleClass?.price}</p>
                                 <div  className="card-actions">
-                                    <button disabled={disabled} onClick={() => handleSelect(singleClass)} className="btn btn-accent">Select</button>
+                                    <button disabled={disabled} onClick={() => handleSelect(singleClass)} className="btn bg-rose-300">Select</button>
                                 </div>
                             </div>
                         </div>

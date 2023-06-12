@@ -7,7 +7,7 @@ import { useContext, useState } from 'react';
 
 const PopularClasses = () => {
     const navigate = useNavigate()
-    const [disabled,setDisabled] = useState(false)
+    const [disabled, setDisabled] = useState(false)
     const { user } = useContext(AuthContext)
     const [axiosSecure] = useAxiosSecure()
     const { data, refetch } = useQuery({
@@ -23,7 +23,7 @@ const PopularClasses = () => {
     const handleSelect = (item) => {
         const { _id: selectedId, availableSeats, classImage, className, instructorEmail, price, instructorName } = item;
         const selectedClass2 = {
-            selectedId, availableSeats, classImage, className, instructorEmail:user?.email, instructorName, price
+            selectedId, availableSeats, classImage, className, instructorEmail: user?.email, instructorName, price
         }
         if (user) {
             // setDisabled(true)
@@ -37,7 +37,7 @@ const PopularClasses = () => {
                 .then(res => res.json())
                 .then(data => {
                     if (data.insertedId) {
-                        
+
                         Swal.fire({
                             title: 'Success!',
                             text: 'Your Class Selected',
@@ -61,7 +61,7 @@ const PopularClasses = () => {
                 confirmButtonText: 'Log In'
             }).then((result) => {
                 if (result.isConfirmed) {
-                   navigate('/login')
+                    navigate('/login')
                 }
             })
         }
@@ -69,12 +69,12 @@ const PopularClasses = () => {
 
     return (
         <div className='pt-32 container'>
-                  <h1 data-aos="fade-up"
-        data-aos-easing="linear"
-        data-aos-duration="1500" className="text-3xl md:text-5xl font-bold text-center mb-32 mt-20 text-gray-600">Popular Classes</h1>
+            <h1 data-aos="fade-up"
+                data-aos-easing="linear"
+                data-aos-duration="1500" className="text-3xl md:text-5xl font-bold text-center mb-32 mt-20 text-gray-600">Popular Classes</h1>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 '>
                 {
-                    data?.slice(0,6).map(singleClass => {
+                    data?.slice(0, 6).map(singleClass => {
                         return <div key={singleClass._id} className="card md:h-[500px] md:w-96 bg-base-100 shadow-2xl">
                             <figure className="px-10 pt-10 rounded-lg">
                                 <img src={singleClass?.classImage} alt="Shoes" className="rounded-xl h-[300px]  w-full" />
@@ -84,8 +84,8 @@ const PopularClasses = () => {
                                 <p><span className='font-bold'>Instructor Name: </span>{singleClass?.instructorName}</p>
                                 <p><span className='font-bold'>Available Seats: </span>{singleClass?.availableSeats}</p>
                                 <p><span className='font-bold'>Price: </span>${singleClass?.price}</p>
-                                <div  className="card-actions">
-                                    <button disabled={disabled} onClick={() => handleSelect(singleClass)} className="btn btn-accent">Select</button>
+                                <div className="card-actions">
+                                    <button disabled={disabled} onClick={() => handleSelect(singleClass)} className="btn bg-rose-300">Select</button>
                                 </div>
                             </div>
                         </div>
