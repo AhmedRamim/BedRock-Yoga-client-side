@@ -41,19 +41,19 @@ const Dashboard = () => {
         <ul className="menu p-4 w-72 h-full bg-accent">
           {/* Sidebar content here */}
           {
-            isAdmin && <><li><NavLink to={'/dashboard/home'}><FaAddressBook />Admin Home </NavLink></li>
+            isAdmin && <>
               <li><NavLink to={'/dashboard/manageclasses'}><FaSchool/> Manage Classes </NavLink></li>
               <li><NavLink to={'/dashboard/manageusers'}><FaUserAlt/> Manage Users</NavLink></li></>
           }
           {
-            isStudent && <><li><NavLink to={'/dashboard/home'}><FaHome /> Home </NavLink></li>
+            isStudent && <>
               <li><NavLink to={'/dashboard/myselectedclass'}><FaCalendarAlt /> My Selected Classes </NavLink></li>
               <li><NavLink to={'/dashboard/myenrolledclass'}><FaCalendarAlt /> My Enrolled Classes </NavLink></li>
               <li><NavLink to={'/dashboard/paymentHistory'}><FaWallet /> Payment </NavLink></li></>
           }
           {
             isInstructor && <>
-            <p className='text-4xl font-bold my-6 text-gray-600'>Instructor Home</p>
+            
               <li><NavLink to={'/dashboard/addclass'}><FaSchool/> Add a Class </NavLink></li>
               <li><NavLink to={'/dashboard/myclass'}><FaSchool/> My Classed</NavLink></li>
               <li><NavLink to={'/dashboard/feedback'}><FaStreetView/> Feedback</NavLink></li></>

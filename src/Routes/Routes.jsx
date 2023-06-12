@@ -16,12 +16,15 @@ import MyClass from "../pages/Dashboard/Instructors/MyClass";
 import UpdateClass from "../pages/Dashboard/Instructors/UpdateClass";
 import MySelectedClass from "../pages/Dashboard/StudentRoute/MySelectedClass";
 import MyEnrolledClass from "../pages/Dashboard/StudentRoute/MyEnrolledClass";
+import AdminHome from "../pages/Dashboard/AdminRoutes/AdminHome";
+import ErrorPage from "../pages/ErrorPage";
 
 
 export const Router = createBrowserRouter([
   {
     path: '/',
     element: <Main></Main>,
+    errorElement:<ErrorPage/>,
     children: [
       {
         path: '/',
@@ -50,7 +53,12 @@ export const Router = createBrowserRouter([
   {
     path: 'dashboard',
     element: <PrivateRoute><Dashboard /></PrivateRoute>,
+    errorElement:<ErrorPage/>,
     children: [
+      {
+        path:'adminhome',
+        element:<AdminHome/>
+      },
       {
         path: 'manageclasses',
         element: <ManageClasses />
