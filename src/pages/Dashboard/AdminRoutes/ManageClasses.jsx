@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { FaAddressBook, FaPen } from "react-icons/fa";
-import { Link } from "react-router-dom";
+
 
 const ManageClasses = () => {
     const [axiosSecure] = useAxiosSecure();
@@ -9,16 +8,16 @@ const ManageClasses = () => {
         queryKey: ['alldata'],
         queryFn: () => axiosSecure.get('/alldata')
             .then(response => {
-                // console.log(response.data);
-                return response.data; // Return the fetched data
+                
+                return response.data; 
             })
             .catch(err => {
                 console.log(err.message);
-                throw err; // Rethrow the error
+                throw err; 
             })
     });
 
-    console.log(data);
+    // console.log(data);
 
     return (
         <div className="overflow-x-auto mt-20 p-8">
@@ -76,7 +75,7 @@ const ManageClasses = () => {
                             <td>${item.price}</td>
                             <td >
                                 <div className="flex gap-2">
-                                    <button disabled className="btn btn-accent btn-xs text-white">Approved</button>
+                                    <button  className="btn btn-accent btn-xs text-white">Approved</button>
                                     <button className="btn btn-accent btn-xs text-white">Deny</button>
                                     <button className="btn btn-accent btn-xs text-white">Feedback</button>
                                 </div>

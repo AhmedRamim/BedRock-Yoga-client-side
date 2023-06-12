@@ -27,7 +27,7 @@ const Login = () => {
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then(result => {
-        // saveUser(result.user)
+        saveUser(result.user)
         console.log(result.user);
         navigate(from)
       })
