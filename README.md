@@ -34,6 +34,6 @@ The project utilizes the following packages and technologies:
 
 ## Live Site
 
-The live site for this project can be accessed at [https://neon-pixie-239eb0.netlify.app/](https://neon-pixie-239eb0.netlify.app/).
+The live site for this project can be accessed at [https://neon-pixie-239eb0.netlify.app/](https://neon-pixie-239eb0.netlify.app/ ).
 
 

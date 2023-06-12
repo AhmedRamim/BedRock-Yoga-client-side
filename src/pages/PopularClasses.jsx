@@ -4,6 +4,7 @@ import { AuthContext } from '../provider/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import { useContext, useState } from 'react';
+import { Fade } from 'react-awesome-reveal';
 
 const PopularClasses = () => {
     const navigate = useNavigate()
@@ -69,29 +70,31 @@ const PopularClasses = () => {
 
     return (
         <div className='pt-32 container'>
-            <h1 data-aos="fade-up"
-                data-aos-easing="linear"
-                data-aos-duration="1500" className="text-3xl md:text-5xl font-bold text-center mb-32 mt-20 text-gray-600">Popular Classes</h1>
-            <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 '>
-                {
-                    data?.slice(0, 6).map(singleClass => {
-                        return <div key={singleClass._id} className="card md:h-[500px] md:w-96 bg-base-100 shadow-2xl">
-                            <figure className="px-10 pt-10 rounded-lg">
-                                <img src={singleClass?.classImage} alt="Shoes" className="rounded-xl h-[300px]  w-full" />
-                            </figure>
-                            <div className="card-body  ">
-                                <h2 className="card-title">{singleClass?.className}</h2>
-                                <p><span className='font-bold'>Instructor Name: </span>{singleClass?.instructorName}</p>
-                                <p><span className='font-bold'>Available Seats: </span>{singleClass?.availableSeats}</p>
-                                <p><span className='font-bold'>Price: </span>${singleClass?.price}</p>
-                                <div className="card-actions">
-                                    <button disabled={disabled} onClick={() => handleSelect(singleClass)} className="btn bg-rose-300">Select</button>
+            <Fade cascade>
+                <h1 className="text-3xl md:text-5xl font-bold text-center mb-32 mt-20 text-gray-600">Popular Classes</h1>
+            </Fade>
+            <Fade delay={1e3} cascade damping={1e-1}>
+                <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 '>
+                    {
+                        data?.slice(0, 6).map(singleClass => {
+                            return <div key={singleClass._id} className="card md:h-[500px] md:w-96 bg-base-100 shadow-2xl">
+                                <figure className="px-10 pt-10 rounded-lg">
+                                    <img src={singleClass?.classImage} alt="Shoes" className="rounded-xl h-[300px]  w-full" />
+                                </figure>
+                                <div className="card-body  ">
+                                    <h2 className="card-title">{singleClass?.className}</h2>
+                                    <p><span className='font-bold'>Instructor Name: </span>{singleClass?.instructorName}</p>
+                                    <p><span className='font-bold'>Available Seats: </span>{singleClass?.availableSeats}</p>
+                                    <p><span className='font-bold'>Price: </span>${singleClass?.price}</p>
+                                    <div className="card-actions">
+                                        <button disabled={disabled} onClick={() => handleSelect(singleClass)} className="btn bg-rose-300">Select</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    })
-                }
-            </div>
+                        })
+                    }
+                </div>
+            </Fade>
         </div>
     );
 };
