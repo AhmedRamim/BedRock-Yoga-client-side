@@ -4,6 +4,7 @@ import { FcGoogle } from 'react-icons/fc'
 import { useContext, useState } from 'react';
 import { AuthContext } from '../provider/AuthProvider';
 import { ToastContainer, toast } from 'react-toastify';
+import { saveUser } from '../api/auth';
 
 
 const image_hosting_token = import.meta.env.VITE_image_upload_token;
@@ -21,6 +22,8 @@ const SignUp = () => {
         else {
             createUser(data.email, data.password)
                 .then(result => {
+                    // navigate('/')
+                    console.log('User created');
                     const formData = new FormData()
                     formData.append('image', data.image[0])
                     fetch(imgUrl, {
@@ -37,7 +40,7 @@ const SignUp = () => {
 
                         })
                     toast('SignUp Successful')
-                    saveUser(result.user)
+                    // saveUser(result.user)
 
                     navigate('/')
                     const loggedUser = result.user;
@@ -52,7 +55,8 @@ const SignUp = () => {
     const handleGoogleSignIn = () => {
         signInWithGoogle()
             .then(result => {
-                saveUser(result.user)
+                // saveUser(result.user)
+                navigate('/')
                 console.log(result.user);
             })
             .catch(err => {

@@ -14,6 +14,8 @@ import ManageUsers from "../pages/Dashboard/AdminRoutes/ManageUsers";
 import AddClass from "../pages/Dashboard/Instructors/AddClass";
 import MyClass from "../pages/Dashboard/Instructors/MyClass";
 import UpdateClass from "../pages/Dashboard/Instructors/UpdateClass";
+import MySelectedClass from "../pages/Dashboard/StudentRoute/MySelectedClass";
+import MyEnrolledClass from "../pages/Dashboard/StudentRoute/MyEnrolledClass";
 
 
 export const Router = createBrowserRouter([
@@ -34,40 +36,48 @@ export const Router = createBrowserRouter([
         element: <SignUp />
       },
       {
-        path:'instructors',
-        element:<Instructors/>
+        path: 'instructors',
+        element: <Instructors />
       },
       {
-        path:'classes',
-        element:<Classes/>
+        path: 'classes',
+        element: <Classes />
       }
-    
+
 
     ]
   },
   {
     path: 'dashboard',
     element: <PrivateRoute><Dashboard /></PrivateRoute>,
-    children:[
+    children: [
       {
-        path:'manageclasses',
-        element:<ManageClasses/>
+        path: 'manageclasses',
+        element: <ManageClasses />
       },
       {
-        path:'manageusers',
-        element:<ManageUsers/>
+        path: 'manageusers',
+        element: <ManageUsers />
       },
       {
-        path:'addclass',
-        element:<AddClass/>
+        path: 'addclass',
+        element: <AddClass />
       },
       {
-        path:'myclass',
-        element:<MyClass/>
+        path: 'myclass',
+        element: <PrivateRoute><MyClass /></PrivateRoute>
       },
       {
-        path:'updateclass/:id',
-        element:<UpdateClass/>
+        path: 'updateclass/:id',
+        element: <UpdateClass />
+      },
+      {
+        path: 'myselectedclass',
+        element: <MySelectedClass />
+      },
+      {
+        path: 'myenrolledclass',
+        element: <MyEnrolledClass />
       }
     ]
 

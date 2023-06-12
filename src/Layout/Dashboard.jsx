@@ -47,8 +47,8 @@ const Dashboard = () => {
           }
           {
             isStudent && <><li><NavLink to={'/dashboard/home'}><FaHome /> Home </NavLink></li>
-              <li><NavLink to={'/dashboard/reservation'}><FaCalendarAlt /> My Selected Classes </NavLink></li>
-              <li><NavLink to={'/dashboard/reservation'}><FaCalendarAlt /> My Enrolled Classes </NavLink></li>
+              <li><NavLink to={'/dashboard/myselectedclass'}><FaCalendarAlt /> My Selected Classes </NavLink></li>
+              <li><NavLink to={'/dashboard/myenrolledclass'}><FaCalendarAlt /> My Enrolled Classes </NavLink></li>
               <li><NavLink to={'/dashboard/paymentHistory'}><FaWallet /> Payment </NavLink></li></>
           }
           {

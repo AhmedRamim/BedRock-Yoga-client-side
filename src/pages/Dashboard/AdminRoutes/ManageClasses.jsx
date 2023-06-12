@@ -1,7 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { updateStatusApproved } from "../../../api/auth";
-import { toast } from "react-toastify";
+import { updateStatusApproved, updateStatusDeny } from "../../../api/auth";
+import { ToastContainer, toast } from "react-toastify";
 
 
 const ManageClasses = () => {
@@ -20,11 +20,20 @@ const ManageClasses = () => {
     });
 
     // update status approved 
+    const queryClient = useQueryClient();
+
+    const mutation = useMutation((id) => updateStatusApproved(id, queryClient.invalidateQueries('allclasses')));
+
+    const mutation2 = useMutation((id) => updateStatusDeny(id, queryClient.invalidateQueries('allclasses')));
+  
     const handleUpdateStatus = (id) => {
-        refetch()
+        mutation.mutate(id);
         toast.success('Class Approved')
-        updateStatusApproved(id)
-    }
+    };
+    const handleUpdateStatusDeny = (id) => {
+        mutation2.mutate(id);
+        toast.success('Class Denied')
+    };
     // console.log(data);
 
     return (
@@ -41,11 +50,13 @@ const ManageClasses = () => {
                         <th>Available Seats</th>
                         <th>Status</th>
                         <th>Price</th>
+                        
                         <th className="text-center">Actions</th>
 
                     </tr>
                 </thead>
                 <tbody>
+                <ToastContainer/>
                     {/* row 1 */}
                     {
                         data && data.map((item, index) => <tr key={item._id}>
@@ -84,7 +95,7 @@ const ManageClasses = () => {
                             <td >
                                 <div className="flex gap-2">
                                     <button onClick={()=> handleUpdateStatus(item._id)}  className="btn btn-accent btn-xs text-white">Approved</button>
-                                    <button className="btn btn-accent btn-xs text-white">Deny</button>
+                                    <button onClick={() => handleUpdateStatusDeny(item._id)} className="btn btn-accent btn-xs text-white">Deny</button>
                                     <button className="btn btn-accent btn-xs text-white">Feedback</button>
                                 </div>
                             </td>
