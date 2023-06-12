@@ -23,9 +23,10 @@ const Classes = () => {
     const handleSelect = (item) => {
         const { _id: selectedId, availableSeats, classImage, className, instructorEmail, price, instructorName } = item;
         const selectedClass2 = {
-            selectedId, availableSeats, classImage, className, instructorEmail, instructorName, price
+            selectedId, availableSeats, classImage, className, instructorEmail:user?.email, instructorName, price
         }
         if (user) {
+            // setDisabled(true)
             fetch(`${import.meta.env.VITE_url}/selectedclass`, {
                 method: 'POST',
                 headers: {
@@ -36,7 +37,7 @@ const Classes = () => {
                 .then(res => res.json())
                 .then(data => {
                     if (data.insertedId) {
-                        setDisabled(true)
+                        
                         Swal.fire({
                             title: 'Success!',
                             text: 'Your Class Selected',
@@ -80,8 +81,8 @@ const Classes = () => {
                                 <p><span className='font-bold'>Instructor Name: </span>{singleClass?.instructorName}</p>
                                 <p><span className='font-bold'>Available Seats: </span>{singleClass?.availableSeats}</p>
                                 <p><span className='font-bold'>Price: </span>${singleClass?.price}</p>
-                                <div disabled={disabled} className="card-actions">
-                                    <button onClick={() => handleSelect(singleClass)} className="btn btn-accent">Select</button>
+                                <div  className="card-actions">
+                                    <button disabled={disabled} onClick={() => handleSelect(singleClass)} className="btn btn-accent">Select</button>
                                 </div>
                             </div>
                         </div>

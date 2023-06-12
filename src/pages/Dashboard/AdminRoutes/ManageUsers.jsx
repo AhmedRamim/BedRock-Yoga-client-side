@@ -53,7 +53,7 @@ const ManageUsers = () => {
                         <td>{index + 1}</td>
                       
                         <td>
-                            {item.name}
+                            {item.name || 'ahmed ramim'}
 
                         </td>
                        
