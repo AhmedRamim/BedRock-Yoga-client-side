@@ -2,6 +2,7 @@ import React from 'react';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { becomeInstructor,becomeAdmin } from '../../../api/auth';
+import { ToastContainer, toast } from 'react-toastify';
 
 const ManageUsers = () => {
     const [axiosSecure] = useAxiosSecure()
@@ -20,10 +21,12 @@ const ManageUsers = () => {
         
         becomeInstructor(email)
         refetch()
+        toast.success('You are now Instructor')
         // setDisable(true)
     }
     const handleMakeAdmin = (email) => {
         becomeAdmin(email)
+        toast.success('You are now Admin')
         
         refetch()
         // setDisable(true)
@@ -43,6 +46,7 @@ const ManageUsers = () => {
                 </tr>
             </thead>
             <tbody>
+                <ToastContainer/>
                 {/* row 1 */}
                 {
                     data && data.map((item, index) => <tr key={item._id}>

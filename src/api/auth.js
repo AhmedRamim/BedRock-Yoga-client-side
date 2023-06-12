@@ -60,3 +60,21 @@ export const becomeAdmin = (email) =>  {
     })
   
 }
+// save user role admin  database
+export const updateStatusApproved = (id) =>  {
+    const updateStatus = {
+       status:'approved'
+    }
+        fetch(`${import.meta.env.VITE_url}/allclasses/${id}`,{
+        method:'PUT',
+        headers:{
+            'content-type':'application/json'
+        },
+        body: JSON.stringify(updateStatus)
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+    })
+  
+}

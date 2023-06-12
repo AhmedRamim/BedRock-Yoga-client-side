@@ -22,7 +22,7 @@ const Instructors = () => {
                             <figure className="px-10 pt-10 rounded-lg">
                                 <img src={singleClass?.classImage} alt="Shoes" className="rounded-xl h-[300px]  w-full" />
                             </figure>
-                            <div className="card-body  ">
+                            <div className="card-body">
                                 <p>Instructor Name: {singleClass?.name}</p>
                                 
                                 <p>{singleClass?.email}</p>

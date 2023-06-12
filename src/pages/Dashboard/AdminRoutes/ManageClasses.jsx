@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { updateStatusApproved } from "../../../api/auth";
+import { toast } from "react-toastify";
 
 
 const ManageClasses = () => {
     const [axiosSecure] = useAxiosSecure();
-    const { data } = useQuery({
+    const { data ,refetch} = useQuery({
         queryKey: ['alldata'],
         queryFn: () => axiosSecure.get('/alldata')
             .then(response => {
@@ -17,6 +19,12 @@ const ManageClasses = () => {
             })
     });
 
+    // update status approved 
+    const handleUpdateStatus = (id) => {
+        refetch()
+        toast.success('Class Approved')
+        updateStatusApproved(id)
+    }
     // console.log(data);
 
     return (
@@ -75,7 +83,7 @@ const ManageClasses = () => {
                             <td>${item.price}</td>
                             <td >
                                 <div className="flex gap-2">
-                                    <button  className="btn btn-accent btn-xs text-white">Approved</button>
+                                    <button onClick={()=> handleUpdateStatus(item._id)}  className="btn btn-accent btn-xs text-white">Approved</button>
                                     <button className="btn btn-accent btn-xs text-white">Deny</button>
                                     <button className="btn btn-accent btn-xs text-white">Feedback</button>
                                 </div>
